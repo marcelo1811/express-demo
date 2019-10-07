@@ -7,6 +7,9 @@ const logger = require('./logger');
 const express = require('express');
 const app = express();
 
+app.set('view engine', 'pug');
+app.set('views', './views'); //default
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 // access to public folder
@@ -34,7 +37,8 @@ const courses = [
 ];
 
 app.get('/', (req, res) => {
-  res.send('hello world');
+  // res.send('hello world');
+  res.render('index', { title: 'My Express app', message: 'hello'})
 })
 
 app.get('/api/courses', (req, res) => {
