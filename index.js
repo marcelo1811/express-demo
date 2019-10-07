@@ -1,17 +1,22 @@
 const Joi = require('joi');
+const morgan = require('morgan');
 const logger = require('./logger');
 const express = require('express');
 const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+// access to public folder
 app.use(express.static('public'));
 app.use(logger);
 
-// app.use((req, res, next) => {
-//   console.log('Authenticating...');
-//   next();
-// })
+if (app.get('env') === 'development') {
+  app.use(morgan('tiny'));
+  console.log('Morgan enabled...');
+}
+
+// console.log(`NODE_ENV: ${process.env.NODE_ENV}`);
+// console.log(`app: ${app.get('env')}`);
 
 const courses = [
   { id: 1, name: 'course1' },
