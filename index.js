@@ -1,3 +1,5 @@
+const debug = require('debug')('app:db');
+
 const config = require('config');
 const Joi = require('joi');
 const morgan = require('morgan');
@@ -13,15 +15,17 @@ app.use(logger);
 
 // Configuration
 console.log('Application Name: ' + config.get('name'));
-console.log('Mail Server: ' + config.get('mail.host'));
+// console.log('Mail Server: ' + config.get('mail.host'));
 
 if (app.get('env') === 'development') {
   app.use(morgan('tiny'));
-  console.log('Morgan enabled...');
+  // console.log('Morgan enabled...');
 }
 
 // console.log(`NODE_ENV: ${process.env.NODE_ENV}`);
 // console.log(`app: ${app.get('env')}`);
+
+debug('Connected to the database...');
 
 const courses = [
   { id: 1, name: 'course1' },
