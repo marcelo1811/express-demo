@@ -1,3 +1,4 @@
+const config = require('config');
 const Joi = require('joi');
 const morgan = require('morgan');
 const logger = require('./logger');
@@ -9,6 +10,10 @@ app.use(express.urlencoded({ extended: true }));
 // access to public folder
 app.use(express.static('public'));
 app.use(logger);
+
+// Configuration
+console.log('Application Name: ' + config.get('name'));
+console.log('Mail Server: ' + config.get('mail.host'));
 
 if (app.get('env') === 'development') {
   app.use(morgan('tiny'));
